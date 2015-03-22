@@ -63,4 +63,17 @@ $app->post('/event(/)', function() use ($app) {
     }
 });
 
+$app->get('/events(/)', function() use ($app) {
+    $EventRepository = new EventRepository();
+    $events = $EventRepository->getLatestEvents();
+
+    if ( !empty($events) ) {
+        $app->render(200, array("events" => $events));
+    } else {
+        $app->render(404, array(
+            'msg' => 'No Events Found'
+        ));
+    }
+});
+
 $app->run();
