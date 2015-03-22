@@ -20,7 +20,7 @@ class EventRepository {
 
     function getLatestEvents() {
         $datetime = time();
-        $SQL = "SELECT * FROM `Events` WHERE EndDatetime > '$datetime' ORDER BY Id DESC";
+        $SQL = "SELECT * FROM `Events` WHERE EndDatetime > '$datetime' ORDER BY StartDatetime ASC";
         $results = select_query($SQL);
 
         $events = array();
