@@ -2,6 +2,7 @@
 require 'vendor/autoload.php';
 require_once 'EventRepository.php';
 require_once 'Event.php';
+require_once 'config.php';
 
 $app = new \Slim\Slim();
 
@@ -54,7 +55,7 @@ $app->post('/event(/)', function() use ($app) {
     if ( $addResult ) {
         $app->render(201, array(
             'msg' => 'successfully created',
-            'url' => BASE_URL . 'event/' .  $addResult
+            'url' => "EventId: " . $addResult
         ));
     } else {
         $app->render(500, array(
