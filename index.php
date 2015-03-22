@@ -45,8 +45,10 @@ $app->post('/event(/)', function() use ($app) {
     $event->Name = filter_var($_POST['Name'], FILTER_SANITIZE_STRING);
     $event->Description = filter_var($_POST['Description'], FILTER_SANITIZE_STRING);
     $event->LocationName = filter_var($_POST['LocationName'], FILTER_SANITIZE_STRING);
-    $event->StartDatetime = filter_var($_POST['StartDatetime'], FILTER_SANITIZE_STRING);
-    $event->EndDatetime = filter_var($_POST['EndDatetime'], FILTER_SANITIZE_STRING);
+
+    $StartDatetime = filter_var($_POST['StartDatetime'], FILTER_SANITIZE_STRING);
+    $EndDatetime = filter_var($_POST['EndDatetime'], FILTER_SANITIZE_STRING);
+    $event->setDateTimes($StartDatetime, $EndDatetime);
 
     $addResult = $EventRepository->addEvent($event);
     if ( $addResult ) {

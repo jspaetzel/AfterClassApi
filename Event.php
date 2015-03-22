@@ -22,4 +22,22 @@ class Event
                 "Longitude" => $this->Longitude
             );
     }
+
+    public function setDateTimes($StartDateTime, $EndDateTime) {
+        try {
+            $this->EndDatetime = $this->convertDateTimeToTimestamp($EndDateTime);
+            $this->StartDatetime = $this->convertDateTimeToTimestamp($StartDateTime);
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    private function convertDateTimeToTimestamp($datetime) {
+        $format = 'm/d/Y g:i A'; // formatting of input strings
+        $timezone = new DateTimeZone('EST');
+
+        $date = date_create_from_format($format, $datetime, $timezone)->getTimestamp();
+        return $date;
+    }
 }
